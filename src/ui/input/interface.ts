@@ -4,4 +4,5 @@ export interface Props {
     placeholder: string;
     id: string;
     modelValue: string;
+    error: any;
 }

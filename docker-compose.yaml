@@ -1,0 +1,25 @@
+---
+version: '3'
+
+services:
+  full_auth_front:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile_local
+    restart: on-failure
+    command: /start-local.sh
+    environment:
+      - LOG_LEVEL=${LOG_LEVEL:-DEBUG}
+      - VUE_APP_BACKEND_HOST=http://localhost:8000
+      - PROD_VERSION=false
+    ports:
+      - "3000:3000"
+    networks:
+      - full_auth
+    volumes:
+      - ./:/app
+
+networks:
+  full_auth:
+    external: false
+    driver: bridge
